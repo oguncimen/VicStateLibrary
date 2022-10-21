@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DAL.CQRS.Handlers.QueryHandler;
+using DAL.CQRS.Queries.Request;
+using DAL.CQRS.Queries.Response;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +11,16 @@ namespace VicStateLibrary.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        GetAllBooksQueryHandler _getAllBooksQueryHandler;
+        public HomeController()
         {
-            return View();
+            GetAllBooksQueryHandler getAllBooksQueryHandler = new GetAllBooksQueryHandler();
+            _getAllBooksQueryHandler = getAllBooksQueryHandler;
         }
-
-        public ActionResult About()
+        public ActionResult Index(GetAllBooksQueryRequest requestModel)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+            List<GetAllBooksQueryResponse> allBooks = _getAllBooksQueryHandler.GetAllBooks(requestModel);
+            return View(allBooks);
+        }           
     }
 }
