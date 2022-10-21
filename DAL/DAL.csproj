@@ -42,16 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="CQRS\Commands\Request\ReserveBookCommandRequest.cs" />
+    <Compile Include="CQRS\Commands\Response\ReserveBookCommandResponse.cs" />
+    <Compile Include="CQRS\Handlers\CommandHandlers\ReserveBookCommandHandler.cs" />
     <Compile Include="CQRS\Handlers\QueryHandler\GetAllBooksQueryHandler.cs" />
     <Compile Include="CQRS\Queries\Request\GetAllBooksQueryRequest.cs" />
     <Compile Include="CQRS\Queries\Response\GetAllBooksQueryResponse.cs" />
     <Compile Include="Entities\Books.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CQRS\Commands\Request\" />
-    <Folder Include="CQRS\Commands\Response\" />
-    <Folder Include="CQRS\Handlers\CommandHandlers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
