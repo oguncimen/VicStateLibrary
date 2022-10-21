@@ -25,10 +25,35 @@
                         <td>@books.Title</td>
                         <td id="book-@books.Id"></td>
 
-                        <td><button id="@books.Id" class="btn btn-primary">Reserve</button></td>
+                        <td><button id="@books.Id" onclick="reserve(this.id)" class="btn btn-primary">Reserve</button></td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
+<script>
+    function reserve(clicked_id) {
+        $.ajax({
+            url: '/Home/ReserveBook',
+            type: "POST",
+            success: function (data) {
+                var clicked_button = document.getElementById(data.Id);
+                clicked_button.textContent = "Reserved";
+                clicked_button.className = "btn btn-danger";
+                //
+                clicked_button.style.pointerEvents = "none";
+                document.getElementById("book-" + data.Id).textContent = data.BookingNumber;
+            },
+            dataType: 'json',
+            data: { id: clicked_id },
+            statusCode: {
+                404: function (content) { alert('cannot find resource'); },
+                500: function (content) { alert('internal server error'); }
+            },
+            error: function (req, status, errorObj) {
+                alert(status);
+            }
+        });
+    };
+</script>
