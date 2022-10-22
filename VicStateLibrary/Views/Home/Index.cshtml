@@ -34,7 +34,8 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function () {  
+        //Book search
         var $rows = $('#table tbody tr');
         $('#search').keyup(function () {
             var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
@@ -53,8 +54,7 @@
             success: function (data) {
                 var clicked_button = document.getElementById(data.Id);
                 clicked_button.textContent = "Reserved";
-                clicked_button.className = "btn btn-danger";
-                //
+                clicked_button.className = "btn btn-danger";                
                 clicked_button.style.pointerEvents = "none";
                 document.getElementById("book-" + data.Id).textContent = data.BookingNumber;
             },
